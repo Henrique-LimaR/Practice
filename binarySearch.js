@@ -1,31 +1,28 @@
 let search = function(nums, target) {
-    let n=nums.length;
-    let left=0,right=n-1;
-    let mid=0;
+    let n=nums.length-1;
+    let left=0,right=n;
+    let rest = (left+right) % 2;
+    let mid=((left+right) - rest)/2;
 
-    let binarySearch = function(val, v, left, right) {       
-     mid=(left+right)/2;
-     if(v[mid]==val)
+    while(left < right)
+    {
+     if(nums[mid]==target)
      {
-         console.log(mid);
          return mid;
      }
-     if(left >= right)
+     if(nums[mid] > target)
      {
-         console.log(-1)
-         return -1;
-     }
-     else {
-        if(v[mid] > val)
-        {
-            return binarySearch(val, v, left,mid-1);
-        }else {
-            return binarySearch(val, v, mid+1, right);
-        };
-     }; 
-    };
-
-    binarySearch(target, nums, left, right);
-};
+       right=(mid-1);
+     }else {
+       left=(mid+1);
+     };
+     
+      if(left > right)
+      {
+        return -1;
+      }
+     mid=((left+right) - rest)/2
+    };   
+ };
 const arr = [1,2,3,4,5,6];
-search(arr, 2);
+console.log(search(arr, 2));
